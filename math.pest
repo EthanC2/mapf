@@ -1,0 +1,7 @@
+function = { SOI ~ expr ~ eoi }
+
+expr = _{}
+term
+
+eoi = _{ !ANY }
+WHITESPACE = _{ " " | "\t" | NEWLINE }
