@@ -12,15 +12,19 @@ use std::ops::*;
     1. A function to apply a given binary operator to `x` and some other number
     2. A function to apply a given unary operator to `x`
     3. A function to compose two functions
+    
+    Note to self: the `apply` functions can just be inlined since they're just closures ://
 */
 
 //Takes a number `num` and a binary operator `op` and returns `num op x` (e.g. `2 * x`)
+#[inline(always)]
 fn apply_binary<A,B,C>(num: A, op: impl Fn(A,B) -> C) -> impl Fn(B) -> C 
 where A: Copy {
     move |x| op(num,x)
 }
 
 //Takes a unary operator `op` and returns `op x` (e.g. `~x`)
+#[inline(always)]
 fn apply_unary<A,B>(op: impl Fn(A) -> B) -> impl Fn(A) -> B {
     move |x| op(x)
 }
