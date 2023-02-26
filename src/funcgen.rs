@@ -2,6 +2,18 @@
 //use pest_derive::Parser;
 use std::ops::*;
 
+/*
+    Any multi-operator expression can be composed by binary and unary functions.
+    For example, `2 * -x + 3` can be broken down into `-x`, `2 * expr` and `expr + 3`
+    where `expr` denotes the previous expression.
+
+    This means that we only need three functions to be able to dynamically create
+    any function:
+    1. A function to apply a given binary operator to `x` and some other number
+    2. A function to apply a given unary operator to `x`
+    3. A function to compose two functions
+*/
+
 //Takes a number `num` and a binary operator `op` and returns `num op x` (e.g. `2 * x`)
 fn apply_binary<A,B,C>(num: A, op: impl Fn(A,B) -> C) -> impl Fn(B) -> C 
 where A: Copy {
@@ -21,14 +33,6 @@ where
 {
     move |x| g(f(x))
 }
-
-
-/*
-    2*x + 3 - 20
-    2 * x
-    + (expr) 3
-    - (expr) 20
-*/
 
 //#[derive(Parser)]
 //#[grammar = "math.pest"]
