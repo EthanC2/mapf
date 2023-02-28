@@ -1,9 +1,13 @@
 mod funcgen;
+mod parser;
 
 use std::io;
 use std::io::prelude::*;
 use std::error::Error;
 use clap::{Command, Arg, ArgAction, value_parser};
+
+use pest::Parser;
+use parser::{FunctionParser, Rule, eval};
 
 fn main() -> Result<(), Box<dyn Error>> {
     let matches = Command::new("MapF(unction)")
@@ -48,15 +52,17 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let reduce = matches.get_one::<bool>("reduce").unwrap_or(&false);
     let mut total = matches.get_one::<u64>("initializer").unwrap_or(&0).to_owned();
-    let filter = matches.get_one::<bool>("filter").unwrap_or(&true);
 
-    for line in io::stdin().lock().lines() {
-        let line = line?;
+    let function = FunctionParser::parse(Rule::function, "2")?;
+    println!("2 * (10 - 30) = {}", parser::eval(function));
 
-    //1. Filter input before mapping
-    //2. Map the function to each line of the input
-    //3. Filter after mapping
-    }
+    //for line in io::stdin().lock().lines() {
+    //   let line = line?;
+
+        //1. Filter input before mapping
+        //2. Map the function to each line of the input
+        //3. Filter after mapping
+    //}
 
 
     Ok(())

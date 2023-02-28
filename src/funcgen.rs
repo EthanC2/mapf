@@ -1,7 +1,3 @@
-//use pest::Parser;
-//use pest_derive::Parser;
-use std::ops::*;
-
 /*
     Any multi-operator expression can be composed by binary and unary functions.
     For example, `2 * -x + 3` can be broken down into `-x`, `2 * expr` and `expr + 3`
@@ -37,7 +33,3 @@ where
 {
     move |x| g(f(x))
 }
-
-//#[derive(Parser)]
-//#[grammar = "math.pest"]
-//struct FunctionParser;

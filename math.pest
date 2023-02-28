@@ -1,7 +1,17 @@
 function = { SOI ~ expr ~ eoi }
 
-expr = _{}
-term
+expr = { term ~ (bin_op ~ term)* }
+term = _{ int | "(" ~ expr ~ ")" }
+
+bin_op = _{ add | sub | mul | div }
+    add = { "+" }
+    sub = { "-" }
+    mul = { "*" }
+    div = { "/" }
+
+int = @{ ("+" | "-")? ~ ASCII_DIGIT+ }
+num = @{ int ~ ("." ~ ASCII_DIGIT+)? ~ (^"e" ~ int)? }
 
 eoi = _{ !ANY }
+
 WHITESPACE = _{ " " | "\t" | NEWLINE }

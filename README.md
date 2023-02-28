@@ -27,7 +27,5 @@ Maps mathematical expressions to input from STDIN.
 
 
 # Notes to Self
-x / 10 - 20 + 30
-/ x 10
-- 20
-+ 30
+- [Custom Pratt Parser](https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html)
+- [Pest Calculator Example Grammar](https://pest.rs/book/examples/calculator.html)
